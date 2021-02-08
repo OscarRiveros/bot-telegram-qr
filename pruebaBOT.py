@@ -13,10 +13,10 @@ logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s,")
 logger = logging.getLogger()
 
-mode  = os.getenv('MODE')
+#mode = os.getenv('MODE')
+
+
 def start(update, context):
-        text='Enviame un texto para generar codigo QR ')
-    return INPUT_TEXT
     logger.info(f"El usuario {update.effective_user['username']}, ha inicadio una conversacion")
     nombre = update.effective_user['first_name']
     update.message.reply_text(f"Hola {nombre}, bienvenido al BOT DE Don Cañete\n\nEste es un texto pre definido, que quieres hacer?\n\nEsto son algunos comandos\n1- /qr generar codigo QR")
@@ -39,7 +39,7 @@ def texto_command_handler(update, context):
 def generate_qr(texto):
     
     filename= texto + '.jpg'
-    #hola.jpg
+    # hola.jpg
     img = qrcode.make(texto)
     img.save(filename)
     
@@ -96,6 +96,6 @@ if __name__ == '__main__':
     
     run(updater)
     updater.start_polling()
-    print('BOT INICIADOO')
+    print('BOT INICIADO')
     updater.idle()
 
