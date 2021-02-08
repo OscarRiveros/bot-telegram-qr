@@ -23,6 +23,9 @@ def start(update, context):
 
 
 def run(updater):
+    updater.start_polling()
+    print('BOT INICIADO')
+    updater.idle()
     PORT = int(os.environ.get("PORT", "8443"))
     HEROKU_APP_NAME = os.environ.get("bot-telegram-qr")
     updater.start_webhook(listen='0.0.0.0',
@@ -95,7 +98,5 @@ if __name__ == '__main__':
     dp.add_handler(MessageHandler(Filters.text, dialogo))
     
     run(updater)
-    updater.start_polling()
-    print('BOT INICIADO')
-    updater.idle()
+    
 
