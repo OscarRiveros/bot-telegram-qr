@@ -17,15 +17,15 @@ logger = logging.getLogger()
 
 
 def start(update, context):
+    updater.start_polling()
+    print('BOT INICIADO')
+    updater.idle()
     logger.info(f"El usuario {update.effective_user['username']}, ha inicadio una conversacion")
     nombre = update.effective_user['first_name']
     update.message.reply_text(f"Hola {nombre}, bienvenido al BOT DE Don Cañete\n\nEste es un texto pre definido, que quieres hacer?\n\nEsto son algunos comandos\n1- /qr generar codigo QR")
 
 
 def run(updater):
-    updater.start_polling()
-    print('BOT INICIADO')
-    updater.idle()
     PORT = int(os.environ.get("PORT", "8443"))
     HEROKU_APP_NAME = os.environ.get("bot-telegram-qr")
     updater.start_webhook(listen='0.0.0.0',
@@ -35,8 +35,7 @@ def run(updater):
 
 def texto_command_handler(update, context):
     
-    update.message.reply_text(
-        text='Enviame un texto para generar codigo QR ')
+    update.message.reply_text(text='Enviame un texto para generar codigo QR ')
     return INPUT_TEXT
 
 def generate_qr(texto):
