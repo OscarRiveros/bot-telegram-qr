@@ -76,7 +76,7 @@ def dialogo(update, context):
 
 if __name__ == '__main__':
 
-    updater = Updater(token='YOUR_TOKEN', use_context=True)
+    updater = Updater(token='1493285499:AAEpQ8ajsD_NFjyX4RXwUc3UvRRZmwC4vsA', use_context=True)
 
     dp = updater.dispatcher
 
