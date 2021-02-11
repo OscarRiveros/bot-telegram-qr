@@ -25,12 +25,15 @@ def start(update, context):
 
 
 def run(updater):
-    PORT = int(os.environ.get("PORT", "5000"))
-    HEROKU_APP_NAME = os.environ.get("bot-telegram-qr")
+    updater.start_polling()
+    print('BOT INICIADO')
+    updater.idle()
+    PORT = int(os.environ.get("PORT", "8443"))
+    HEROKU_APP_NAME = os.environ.get("bot-telegram-qr.herokuapp")
     updater.start_webhook(listen='0.0.0.0',
                       port=PORT,
-                      url_path='1493285499:AAEpQ8ajsD_NFjyX4RXwUc3UvRRZmwC4vsA')
-    updater.bot.set_webhook("https://{bot-telegram-qr.herokuapp}.herokuapp.com/{TOKEN}")
+                      url_path='YOUR_TOKEN_')
+    updater.bot.set_webhook("https://{HEROKU_APP_NAME}.herokuapp.com/{TOKEN}")
 
 def texto_command_handler(update, context):
     update.message.reply_text(text='Enviame un texto para generar codigo QR ')
@@ -66,8 +69,8 @@ def input_text(update, context):
 def dialogo(update, context):
     user_id = update.effective_user['id']
     nombre = update.effective_user['first_name']
-    logger.info(f'El usuario {user_id}, ha enviado un mensaje de texto')
     text = update.message.text
+    logger.info(f'El usuario {user_id}, ha enviado el siguiente texto *{text}*')
     context.bot.sendMessage(
         chat_id=user_id,
         
@@ -76,7 +79,7 @@ def dialogo(update, context):
 
 if __name__ == '__main__':
 
-    updater = Updater(token='1493285499:AAEpQ8ajsD_NFjyX4RXwUc3UvRRZmwC4vsA', use_context=True)
+    updater = Updater(token='YOUR_TOKEN', use_context=True)
 
     dp = updater.dispatcher
 
@@ -96,7 +99,3 @@ if __name__ == '__main__':
     
 
 run(updater)
-    
- #updater.start_polling()
- #print('BOT INICIADO')
- #updater.idle()
